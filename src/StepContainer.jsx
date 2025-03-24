@@ -3,9 +3,9 @@ import StepCircle from "./component/StepCircle";
 import Button from "./component/Button";
 
 const StepContainer = ({ width = 0 }) => {
-  let arr = [1, 2, 3, 4];
-  let getCheckedIndex = width / 33;
-  if (width > 99) width = 99;
+  let arr = ["Contact-details", "Shipping Address", "Payment", "Delivered"];
+  let getCheckedIndex = width / 34;
+  if (width > 102) width = 100;
   return (
     <div className="w-full flex  relative ">
       <div className="absolute top-[70%] left-0 right-0 flex justify-center">
@@ -18,11 +18,19 @@ const StepContainer = ({ width = 0 }) => {
       </div>
       <div className="flex justify-around w-full mt-[80px] z-10">
         {arr.map((ele, ind) => {
-          if (ind < getCheckedIndex)
-            return <StepCircle step={ele} checked={"green"} />;
-          if (ind == getCheckedIndex)
-            return <StepCircle step={ele} checked={"red"} />;
-          return <StepCircle step={ele} />;
+          let checkedColor =
+            ind < getCheckedIndex
+              ? "green"
+              : ind === getCheckedIndex
+              ? "red"
+              : "gray";
+
+          return (
+            <div key={ind} className="flex flex-col items-center">
+              <StepCircle step={ind + 1} checked={checkedColor} msg={ele} />
+              <span>{ele}</span>
+            </div>
+          );
         })}
       </div>
     </div>
